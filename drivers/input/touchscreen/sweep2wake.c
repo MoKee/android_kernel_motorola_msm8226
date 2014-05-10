@@ -465,8 +465,8 @@ static void s2w_power_resume(struct power_suspend *h) {
 }
 
 static struct power_suspend s2w_power_suspend_handler = {
-	.suspend = s2w_early_suspend,
-	.resume = s2w_late_resume,
+	.suspend = s2w_power_suspend,
+	.resume = s2w_power_resume,
 };
 #endif
 
