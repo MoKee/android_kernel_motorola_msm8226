@@ -29,6 +29,10 @@
 
 #include "mdss_dsi.h"
 
+#ifdef CONFIG_POWERSUSPEND
+#include <linux/powersuspend.h>
+#endif
+
 #define DT_CMD_HDR 6
 #define ESD_DROPBOX_MSG "ESD event detected"
 #define ESD_TE_DROPBOX_MSG "ESD TE event detected"
@@ -402,6 +406,10 @@ static int mdss_dsi_get_pwr_mode(struct mdss_panel_data *pdata, u8 *pwr_mode)
 		goto end;
 	}
 
+#ifdef CONFIG_POWERSUSPEND
+	set_power_suspend_state_pannel_hook(POWER_SUSPEND_INACTIVE);
+#endif
+
 	mdss_dsi_panel_cmd_read(ctrl, DCS_CMD_GET_POWER_MODE, 0x00,
 					NULL, pwr_mode, 1);
 end:
@@ -436,6 +444,10 @@ static int mdss_dsi_panel_regulator_init(struct mdss_panel_data *pdata)
 		if (ret)
 			pr_err("%s:fail to init regs. ret=%d\n", __func__, ret);
 	}
+
+#ifdef CONFIG_POWERSUSPEND
+	set_power_suspend_state_pannel_hook(POWER_SUSPEND_ACTIVE);
+#endif
 
 	return ret;
 }
