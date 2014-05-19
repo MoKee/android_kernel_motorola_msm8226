@@ -407,7 +407,7 @@ static int mdss_dsi_get_pwr_mode(struct mdss_panel_data *pdata, u8 *pwr_mode)
 	}
 
 #ifdef CONFIG_POWERSUSPEND
-	set_power_suspend_state_pannel_hook(POWER_SUSPEND_INACTIVE);
+	set_power_suspend_state_panel_hook(POWER_SUSPEND_INACTIVE);
 #endif
 
 	mdss_dsi_panel_cmd_read(ctrl, DCS_CMD_GET_POWER_MODE, 0x00,
@@ -446,7 +446,7 @@ static int mdss_dsi_panel_regulator_init(struct mdss_panel_data *pdata)
 	}
 
 #ifdef CONFIG_POWERSUSPEND
-	set_power_suspend_state_pannel_hook(POWER_SUSPEND_ACTIVE);
+	set_power_suspend_state_panel_hook(POWER_SUSPEND_ACTIVE);
 #endif
 
 	return ret;
